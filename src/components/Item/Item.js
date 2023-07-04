@@ -20,7 +20,6 @@ const Item = ({ id, name, price, stock,url }) => {
         <Link to = {`/item/${id}`} >ver detalle</Link>
         <ItemCount initial={1} stock={stock} onAdd= {(quantity) => console.log ('cant', quantity)}/>              
         </div>
-        <button className="button is-warning"> fasf</button>
 
         </div>          
     </div>
