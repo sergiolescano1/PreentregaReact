@@ -1,5 +1,4 @@
 import cart from './imagenes/carrito.png'
-
 const CardWidget=()=>{ //genero imagen del carrito y un numero fijo 
     return(
         <div>

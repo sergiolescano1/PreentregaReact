@@ -1,21 +1,35 @@
-const ItemListContainer = ({ titulo,precio, img })=>{
-    return(
-        <div className="card">
-        <div className="card-img">
-            <figure className="image">
-                <img src={img} alt="logo"/>
-            </figure>
-        </div>
-        <div className="card-content">
-            <div className="media-content">
-                <div>Articulo: {titulo} </div>
-                <p>El Precio es: $ {precio}</p>
-              
+
+import { useState,useEffect } from "react"
+ import {getProducts,getProductsByCategory} from '../../asyncMock' //clases3
+import ItemList from '../ItemList/ItemList'
+import { useParams } from "react-router-dom"
+const ItemListContainer = ({greeting})=>{
+    const [products, setProducts]=useState([])
+    const {categoryId}= useParams()
+    
+   useEffect(()=>{
+    const asyncFunc = categoryId ? getProductsByCategory : getProducts
+    asyncFunc(categoryId)
+    .then (response => {
+        setProducts (response)
+
+    })
+    .catch (error => {
+        console.error (error)
+    })
+   }, [categoryId])
+   
+   return(
+       <div>
+           <h1>{greeting}</h1>
+           <div> <ItemList products={products}/>
             </div>
-        </div>          
-    </div>
+           <p>FIN de Productos</p>
 
-    )
-}
-
-export default ItemListContainer
+       </div>
+   ) 
+   }
+   
+   export default ItemListContainer
+   
+   
